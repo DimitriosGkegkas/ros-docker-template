@@ -44,16 +44,25 @@ docker exec -it ros_container bash
 
 ## 🧪 Testing with ROS1 Demo Nodes
 
-With two terminals open inside the container:
+**Important:** ROS1 requires a master node (`roscore`) to be running before any other nodes can start.
 
-### **Terminal 1: Start the Listener (Python)**
+With three terminals open inside the container:
+
+### **Terminal 1: Start the ROS Master**
 ```bash
-rosrun rospy_tutorials listener
+roscore
 ```
+
+Keep this terminal running. The master must be running for other nodes to work.
 
 ### **Terminal 2: Start the Talker (Python)**
 ```bash
 rosrun rospy_tutorials talker
+```
+
+### **Terminal 3: Start the Listener (Python)**
+```bash
+rosrun rospy_tutorials listener
 ```
 
 You should see the listener receive messages from the talker, verifying that the ROS1 setup works correctly.
@@ -86,6 +95,7 @@ docker compose down
 
 - The ROS1 environment is sourced automatically via `/etc/bash.bashrc`
 - The workspace directory `/catkin_ws/src` is mounted from your local `./src` folder
+- **ROS1 requires `roscore` to be running** before starting any nodes (unlike ROS2 which doesn't need a master)
 - You can build ROS1 packages inside the container using:
 
 ```bash
