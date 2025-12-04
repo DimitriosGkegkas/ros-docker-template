@@ -1,0 +1,9 @@
+services:
+  ros:
+    container_name: ros_container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/catkin_ws/src
+    tty: true
